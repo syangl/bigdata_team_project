@@ -11,7 +11,7 @@
     <modules>
         <module>sl_common</module>
         <module>sl_producer</module>
-        <module>sl_comsumer</module>
+        <module>sl_consumer</module>
         <module>sl_analysis</module>
         <module>sl_web</module>
     </modules>

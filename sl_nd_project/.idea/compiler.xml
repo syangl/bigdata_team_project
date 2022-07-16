@@ -7,10 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="sl_analysis" />
-        <module name="sl_producer" />
+        <module name="sl_consumer" />
         <module name="sl_common" />
         <module name="sl_web" />
-        <module name="sl_comsumer" />
+        <module name="sl_producer" />
       </profile>
     </annotationProcessing>
   </component>
