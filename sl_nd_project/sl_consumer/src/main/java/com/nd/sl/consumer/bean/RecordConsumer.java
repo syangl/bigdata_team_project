@@ -44,7 +44,6 @@ public class RecordConsumer implements Consumer {
             }
         }
 
-
     }
 
     @Override

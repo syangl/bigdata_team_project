@@ -3,17 +3,20 @@ package com.nd.sl.common.bean;
 import com.nd.sl.common.constant.Names;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.*;
-import org.apache.hadoop.hbase.client.Admin;
-import org.apache.hadoop.hbase.client.Connection;
-import org.apache.hadoop.hbase.client.ConnectionFactory;
+import org.apache.hadoop.hbase.client.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.nd.sl.common.constant.ValueConstant;
+import org.apache.hadoop.hbase.util.Bytes;
 
 /**
  * @ClassName: BaseHBaseDao
  * @PackageName:com.nd.sl.common.bean
  * @Description: 基础数据访问对象
- * @Author LiuSiyang
+ * @Author LiuSiyang&&Chendu
  * @Date 2022/7/16 11:14
  * @Version 1.0.0
  */
@@ -171,14 +174,24 @@ public class BaseHBaseDao {
         admin.deleteTable(tableName);
     }
 
-
     /**
      * 生成分区键
      * @param regionNum 分区数量
      * @return
      */
     private byte[][] genSplitKeys(int regionNum) {
-
+        int splitKeyCount=regionNum-1;//如果有5个分区，只有4个分区键
+        byte[][] bs=new byte[splitKeyCount][];//写一个二维数组,为分区键
+        //分区键:0|,1|,2|,3|
+        //[负无穷,0|),[0|,1|),[1|,2|),[2|,3|),[3|,正无穷)
+        List<byte[]> bsList=new ArrayList<byte[]>();
+        for (int i = 0; i < splitKeyCount; i++) {
+            String splitKey=i+"|";
+            System.out.println(splitKey);
+            bsList.add(Bytes.toBytes(splitKey));
+        }
+        bsList.toArray(bs);
+        return bs;
     }
 
     /**
@@ -187,11 +200,32 @@ public class BaseHBaseDao {
      * @param date 购买日期 20210105
      * @return
      */
-    protected int genRegionNum(String cid,String date) {
-
+    protected int genRegionNum(String cid, String date) {
+        //1234567890,取后四位没有规律的
+        String userCode=cid.substring(cid.length()-4);
+        //20210105,获取年月
+        String yearMonth=date.substring(0,6);
+        //实现散列
+        int userCodeHash=userCode.hashCode();
+        int yearMonthHash=yearMonth.hashCode();
+        //crc校验采用异或算法
+        int crc=Math.abs(userCodeHash^yearMonthHash);
+        //取模
+        int num=crc% ValueConstant.REGION_NUM;
+        return num;
     }
 
-
+    /**
+     * put一条数据
+     * @param name
+     * @param put
+     */
+    protected void putData(String name, Put put) throws IOException {
+        Connection connection = getConnect();
+        Table table = connection.getTable(TableName.valueOf(name));
+        table.put(put);
+        table.close();
+    }
 
 }
 
