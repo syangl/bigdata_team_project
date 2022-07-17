@@ -3,8 +3,7 @@ package com.nd.sl.producer.bean;
 import com.nd.sl.common.bean.DataIn;
 import com.nd.sl.common.bean.DataOut;
 import com.nd.sl.common.bean.Producer;
-import util.DateUtil;
-import util.NumberUtil;
+import com.nd.sl.common.util.DateUtil;
 
 
 import java.io.IOException;
@@ -34,24 +33,18 @@ public class LocalFileProducer implements Producer {
         try {
             List<user> users = in.read(user.class);
             List<goods> goods = in2.read(goods.class);
-//        for (Contact contact:contacts){
-//            System.out.println(contact);
-//        }
             while (flag){
-                //从用户表中随机生成主叫被叫
+                //从用户表和商品表中随机生成用户和商品
                 int customerindex=new Random().nextInt(users.size());//下标
                 int goodsindex=-1;//商品下标
                 user user1=users.get(customerindex);
                 goods goods1=null;
-//                while (true){
                     goodsindex=new Random().nextInt(goods.size());//商品下标
                     goods1=goods.get(goodsindex);
 
-//                }
                 //生产购买时间
-                String startDate="202201010000000";
-                String endDate="202301010000000";
-//
+                String startDate="202101010000000";
+                String endDate="202201010000000";
                 long startTime= DateUtil.parse(startDate,"yyyyMMddHHmmss").getTime();
                 long endTime= DateUtil.parse(endDate,"yyyyMMddHHmmss").getTime();
                 //购买时间

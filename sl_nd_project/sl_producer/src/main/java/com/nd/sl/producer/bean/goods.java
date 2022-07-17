@@ -6,9 +6,9 @@ import com.nd.sl.common.bean.Data;
 
 
     public class goods extends Data {
-        private String goodsid;
-        private String goodsname;
-        private String price;
+        private String goodsid;//商品id
+        private String goodsname;//商品名字
+        private String price;//商品价格
 
         public String getGoodsid() {
             return goodsid;

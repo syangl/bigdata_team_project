@@ -5,8 +5,8 @@ import com.nd.sl.common.bean.Data;
 
 
 public class user extends Data {
-    private String useid;
-    private String name;
+    private String useid;//用户id
+    private String name;//用户姓名
 
     public String getUseid() {
         return useid;
