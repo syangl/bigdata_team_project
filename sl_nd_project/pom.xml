@@ -14,6 +14,7 @@
         <module>sl_consumer</module>
         <module>sl_analysis</module>
         <module>sl_web</module>
+        <module>sl_analysis</module>
     </modules>
 
     <properties>
