@@ -48,4 +48,11 @@ public class RecordController {
         model.addAttribute("objects",record3);
         return "viewallyear";
     }
+    @RequestMapping("viewmonth.do")
+    public String viewmonth(Model model,
+                       @RequestParam(name = "pmonth",defaultValue = "")Integer pmonth){
+        List<Record> record1 = recordService.getpermonth(pmonth);
+        model.addAttribute("permonths",record1);
+        return "viewmonth";
+    }
 }

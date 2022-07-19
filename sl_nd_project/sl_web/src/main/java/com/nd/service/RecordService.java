@@ -20,4 +20,5 @@ public interface RecordService {
     List<Record> getRecord(String pName);
     List<MonthRecord> getMonth();
     List<ObjectRecord> getObject() throws SQLException, ClassNotFoundException;
+    List<Record> getpermonth(Integer pmonth);
 }

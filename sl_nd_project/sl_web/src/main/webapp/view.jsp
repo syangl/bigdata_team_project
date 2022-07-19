@@ -49,8 +49,7 @@
                 data: ['月份', '销售额']
             },
             title: {
-                text: '商品2021年销量柱形统计图',
-                subtext: '商品名称：'+'${records[0].pname}'
+                text: '${records[0].pname}'+'2021年销量柱形统计图'
             },
             toolbox: {
                 show: true,

@@ -101,4 +101,12 @@ public class RecordServiceImpl implements RecordService {
         }
         return list;
     }
+
+    @Override
+    public List<Record> getpermonth(Integer pmonth) {
+        Map<String,Object> map=new HashMap<>();
+        map.put("pmonth",pmonth);
+        List<Record> record = recordDao.getpermonth(map);
+        return record;
+    }
 }

@@ -8,7 +8,9 @@ package com.nd.entity;
  * Description:
  */
 
-public class ObjectRecord {
+import java.io.Serializable;
+
+public class ObjectRecord implements Serializable {
     private String pid;
     private String pname;
     private Integer sumamount;

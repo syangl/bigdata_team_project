@@ -17,4 +17,8 @@
     <select id="getObject" resultType="Record">
         select * from tb_record
     </select>
+
+    <select id="getpermonth" resultType="Record">
+        select * from tb_record where month=${pmonth}
+    </select>
 </mapper>

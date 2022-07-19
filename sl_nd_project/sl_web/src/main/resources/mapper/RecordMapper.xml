@@ -6,9 +6,7 @@
 
     <!--根据电话号码查询每个月份的通话记录-->
     <select id="getRecord" resultType="Record">
-        select *
-        from tb_record
-        where pid=#{pName}
+        select * from tb_record where pid=#{pName}
     </select>
     <select id="getMonth" resultType="Record">
         select * from tb_record
@@ -16,5 +14,9 @@
 
     <select id="getObject" resultType="Record">
         select * from tb_record
+    </select>
+
+    <select id="getpermonth" resultType="Record">
+        select * from tb_record where month=${pmonth}
     </select>
 </mapper>
