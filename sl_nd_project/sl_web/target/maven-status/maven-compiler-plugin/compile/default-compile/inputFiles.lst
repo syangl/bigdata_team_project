@@ -1,7 +1,7 @@
-D:\IntelliJ IDEA 2019.1.2\mycode\NKU\sl_web\src\main\java\com\nd\controller\RecordController.java
-D:\IntelliJ IDEA 2019.1.2\mycode\NKU\sl_web\src\main\java\com\nd\dao\RecordDao.java
-D:\IntelliJ IDEA 2019.1.2\mycode\NKU\sl_web\src\main\java\com\nd\service\RecordService.java
-D:\IntelliJ IDEA 2019.1.2\mycode\NKU\sl_web\src\main\java\com\nd\entity\MonthRecord.java
-D:\IntelliJ IDEA 2019.1.2\mycode\NKU\sl_web\src\main\java\com\nd\service\impl\RecordServiceImpl.java
-D:\IntelliJ IDEA 2019.1.2\mycode\NKU\sl_web\src\main\java\com\nd\entity\ObjectRecord.java
-D:\IntelliJ IDEA 2019.1.2\mycode\NKU\sl_web\src\main\java\com\nd\entity\Record.java
+D:\Studyandwork\NKUinternship\idea\idea-projects\sl_nd_project\sl_web\src\main\java\com\nd\service\impl\RecordServiceImpl.java
+D:\Studyandwork\NKUinternship\idea\idea-projects\sl_nd_project\sl_web\src\main\java\com\nd\controller\RecordController.java
+D:\Studyandwork\NKUinternship\idea\idea-projects\sl_nd_project\sl_web\src\main\java\com\nd\dao\RecordDao.java
+D:\Studyandwork\NKUinternship\idea\idea-projects\sl_nd_project\sl_web\src\main\java\com\nd\entity\Record.java
+D:\Studyandwork\NKUinternship\idea\idea-projects\sl_nd_project\sl_web\src\main\java\com\nd\service\RecordService.java
+D:\Studyandwork\NKUinternship\idea\idea-projects\sl_nd_project\sl_web\src\main\java\com\nd\entity\MonthRecord.java
+D:\Studyandwork\NKUinternship\idea\idea-projects\sl_nd_project\sl_web\src\main\java\com\nd\entity\ObjectRecord.java

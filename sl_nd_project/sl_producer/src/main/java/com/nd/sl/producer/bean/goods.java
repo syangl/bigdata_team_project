@@ -34,6 +34,7 @@ import com.nd.sl.common.bean.Data;
             this.price = price;
         }
 
+        @Override
         public void setValue(Object val){
             context=(String)val;
             String[] split=context.split("\t");

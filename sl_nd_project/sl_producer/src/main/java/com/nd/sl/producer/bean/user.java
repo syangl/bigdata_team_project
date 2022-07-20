@@ -24,6 +24,7 @@ public class user extends Data {
         this.name = name;
     }
 
+    @Override
     public void setValue(Object val){
         context=(String)val;
         String[] split=context.split("\t");

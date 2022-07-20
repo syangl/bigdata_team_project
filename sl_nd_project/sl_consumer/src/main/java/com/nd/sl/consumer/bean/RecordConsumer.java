@@ -38,7 +38,7 @@ public class RecordConsumer implements Consumer {
         while(true){
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
             for (ConsumerRecord<String, String> record : records) {
-                System.out.println(record.value());
+                //System.out.println(record.value());
                 //存储数据
                 hBaseDao.insertData(record.value());
             }
