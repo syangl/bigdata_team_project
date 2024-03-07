@@ -23,12 +23,12 @@ import java.util.Properties;
 public class RecordConsumer implements Consumer {
     @Override
     public void consumer() throws IOException {
-        //创建配置对象
+        //创建配置对象（Properties类用于读取Java的配置文件，在Java中，其配置文件常为.properties文件，是以键值对的形式进行参数配置的）
         Properties prop=new Properties();
         prop.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("consumer.properties"));
-        //获取flume采集的数据
+        //获取flume采集的数据（hadoop集群上部署的flume配置文件中，设置采集本地生产的数据文件）
         KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(prop);
-        //关注主题
+        //消费者关注topic
         consumer.subscribe(Arrays.asList(Names.TOPIC.getValue()));
         //创建HBaseDao对象
         HBaseDao hBaseDao = new HBaseDao();

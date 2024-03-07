@@ -15,12 +15,16 @@ import org.apache.hadoop.hbase.util.Bytes;
 /**
  * @ClassName: BaseHBaseDao
  * @PackageName:com.nd.sl.common.bean
- * @Description: 基础数据访问对象
+ * @Description: 基础数据访问对象（Dao用于关系型数据库访问，有接口、实现类、存放传输数据的实体类）
  * @Author LiuSiyang&&Chendu
  * @Date 2022/7/16 11:14
  * @Version 1.0.0
  */
+/**
+ *Dao通俗来讲，就是将数据库操作都封装起来
+ * */
 public class BaseHBaseDao {
+
     /**
      * 创建线程访问对象
      */
@@ -112,7 +116,7 @@ public class BaseHBaseDao {
         createTableTX(name,null,families);
     }
     /**
-     * 创建有预分区的表
+     * 创建有预分区的表（分区即hbase table中的region）
      * @param name 表名
      * @param regionNum 分区号
      * @param families 列族名
@@ -142,6 +146,7 @@ public class BaseHBaseDao {
         //列族
         if(families.length==0||families==null){
             families=new String[1];
+            // 自定义的默认名称常量
             families[0]= Names.CF_INFO.getValue();
         }
         for (String family : families) {
@@ -175,7 +180,7 @@ public class BaseHBaseDao {
     }
 
     /**
-     * 生成分区键
+     * 生成分区键（每个region是按照startRowKey和endRowKey划分的）
      * @param regionNum 分区数量
      * @return
      */
@@ -205,7 +210,8 @@ public class BaseHBaseDao {
         String userCode=cid.substring(cid.length()-4);
         //20210105,获取年月
         String yearMonth=date.substring(0,6);
-        //实现散列
+        //实现散列（通过对象的内部地址(也就是物理地址)转换成一个整数，然后该整数通过hash函数的算法就得到了hashcode。
+        // 所以，hashcode就是在hash表中对应的位置。）
         int userCodeHash=userCode.hashCode();
         int yearMonthHash=yearMonth.hashCode();
         //crc校验采用异或算法
@@ -220,6 +226,11 @@ public class BaseHBaseDao {
      * @param name
      * @param put
      */
+    /*
+    * Put类中主要含有一个KeyValue对象数组，一个Put对象值代表一行数据；
+    * 在KeyValue对象中，Key（键）包含了一个value值的row、family、column和timestamp信息，而value则是该表单元格的数据。
+    *
+    * */
     protected void putData(String name, Put put) throws IOException {
         Connection connection = getConnect();
         Table table = connection.getTable(TableName.valueOf(name));

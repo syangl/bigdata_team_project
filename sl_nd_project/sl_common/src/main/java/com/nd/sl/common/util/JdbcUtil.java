@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class JdbcUtil {
+public class JdbcUtil {// jdbc驱动获取mysql数据库连接
     private static final String driverManager="com.mysql.jdbc.Driver";
     private static final String url="jdbc:mysql://hadoop101:3306/sl?useUnicode=true&characterEncoding=UTF-8&&serverTimezone=GMT%2B8";
     private static final String username="root";

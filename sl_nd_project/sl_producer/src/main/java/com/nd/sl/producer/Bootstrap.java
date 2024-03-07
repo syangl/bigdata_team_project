@@ -18,8 +18,8 @@ public class Bootstrap {
 
         //构建生产者对象
         Producer producer=new LocalFileProducer();
-       producer.setIn(new LocalFileDataIn(args[0]),new LocalFileDataIn(args[1]));
-       producer.setOut(new LocalFileDataOut(args[2]));
+        producer.setIn(new LocalFileDataIn(args[0]),new LocalFileDataIn(args[1]));
+        producer.setOut(new LocalFileDataOut(args[2]));
         //生产数据
         producer.producer();
         //释放资源

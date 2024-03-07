@@ -15,7 +15,7 @@ public class LocalFileProducer implements Producer {
     private DataIn in;
     private DataIn in2;
     private DataOut out;
-    private volatile boolean flag = true;//进程可共享
+    private volatile boolean flag = true;
 
     @Override
     public void setIn(DataIn in, DataIn in2) {
@@ -29,6 +29,9 @@ public class LocalFileProducer implements Producer {
         this.out = out;
     }
 
+    /**
+     * 随机生成海量数据
+     * */
     @Override
     public void producer() throws IOException {
         try {
@@ -49,7 +52,7 @@ public class LocalFileProducer implements Producer {
                 long startTime = DateUtil.parse(startDate, "yyyyMMddHHmmss").getTime();
                 long endTime = DateUtil.parse(endDate, "yyyyMMddHHmmss").getTime();
                 //购买时间
-                long buyTime = startTime + (long) ((endTime - startTime) * Math.random());
+                long buyTime = startTime + (long) ((endTime - startTime) * Math.random()); // Math.random()返回[0,1)的随机数
                 //把购买时间转换为字符串
                 String buyTimeString = DateUtil.format(new Date(buyTime), "yyyyMMddHHmmss");
                 String buytime = buyTimeString.substring(0, 8);
@@ -57,7 +60,7 @@ public class LocalFileProducer implements Producer {
 //            生成购买数目
                 int d;
                 while (true) {
-                    d = (new Random().nextInt(6));
+                    d = (new Random().nextInt(6)); // [0,6)
                     if (d != 0) {
                         break;
                     }
