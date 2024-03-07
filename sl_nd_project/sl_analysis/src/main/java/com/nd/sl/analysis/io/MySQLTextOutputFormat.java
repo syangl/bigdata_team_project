@@ -14,6 +14,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class MySQLTextOutputFormat extends OutputFormat<Text,Text> {
+    // 所有实现mapreduce输出的程序必须实现OutputFormat接口
+    // 最终结果怎么写，以什么形式写，写到哪儿等等，都是在RecordWriter()里控制的。
     protected static class MySQLRecordWriter extends RecordWriter<Text,Text>{
         private Connection connection=null;
         public MySQLRecordWriter(){
@@ -36,7 +38,7 @@ public class MySQLTextOutputFormat extends OutputFormat<Text,Text> {
             String month=keyValues[2];
             String pnum=values[0];
             String amount=values[1];
-            PreparedStatement ps=null;
+            PreparedStatement ps=null; // SQL语句已预编译并存储在PreparedStatement对象中。 然后，可以使用此对象多次有效地执行此语句。
             try {
                 String insertSQL="insert into tb_record(pid,pname,month,pnum,amount) values(?,?,?,?,?)";
                 ps = connection.prepareStatement(insertSQL);
@@ -45,7 +47,7 @@ public class MySQLTextOutputFormat extends OutputFormat<Text,Text> {
                 ps.setInt(3,Integer.parseInt(month));
                 ps.setInt(4,Integer.parseInt(pnum));
                 ps.setInt(5,Integer.parseInt(amount));
-                ps.executeUpdate();
+                ps.executeUpdate(); // 更新表
             } catch (SQLException e) {
                 e.printStackTrace();
             }finally {
@@ -76,6 +78,8 @@ public class MySQLTextOutputFormat extends OutputFormat<Text,Text> {
             }
         }
     }
+
+    // getRecordWriter用于返回一个RecordWriter的实例，Reduce任务在执行的时候就是利用这个实例来输出Key/Value的。
     @Override
     public RecordWriter<Text, Text> getRecordWriter(TaskAttemptContext context) throws IOException, InterruptedException {
         return new MySQLRecordWriter();
@@ -83,14 +87,20 @@ public class MySQLTextOutputFormat extends OutputFormat<Text,Text> {
 
     @Override
     public void checkOutputSpecs(JobContext context) throws IOException, InterruptedException {
-
     }
     private PathOutputCommitter committer = null;
     public static Path getOutputPath(JobContext job) {
         String name = job.getConfiguration().get(FileOutputFormat.OUTDIR);
         return name == null ? null: new Path(name);
     }
-    //提交mapreduce给hadoop
+
+    /**
+     * 提交mapreduce给hadoop
+     * OutputCommitter用于控制Job的输出环境：
+     * Job开始被执行之前，框架会调用OutputCommitter.setupJob()为Job创建一个输出路径；
+     * 如果Job成功完成，框架会调用OutputCommitter.commitJob()提交Job的输出；
+     * 如果Job失败，框架会调用OutputCommitter.abortJob()撤销Job的输出。
+     */
     @Override
     public OutputCommitter getOutputCommitter(TaskAttemptContext context) throws IOException, InterruptedException {
         if (committer == null) {

@@ -23,11 +23,12 @@ public class AnalysisTextReducer extends Reducer<Text,Text,Text,Text> {
             String[] infos=info.split("_");
             int num=Integer.parseInt(infos[0]);
             int unitprice=Integer.parseInt(infos[1]);
+            // 做reduce统计
             pnum+=num;
             amount+=num*unitprice;
         }
         //打印测试
-        System.out.println(pid+"_"+pname+"_"+month+"_"+pnum+"_"+amount);
+//        System.out.println(pid+"_"+pname+"_"+month+"_"+pnum+"_"+amount);
         context.write(key,new Text(pnum+"_"+amount));
     }
 }

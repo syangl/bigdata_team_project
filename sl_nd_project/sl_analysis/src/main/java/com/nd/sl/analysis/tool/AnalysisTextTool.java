@@ -16,11 +16,11 @@ import org.apache.hadoop.util.Tool;
 public class AnalysisTextTool implements Tool {
     @Override
     public int run(String[] args) throws Exception {
-        //获取job
+        //获取job（Job对象指定作业执行规范，用它来控制整个作业的运行）
         Job job= Job.getInstance();
         //设置jar位置
         job.setJarByClass(AnalysisTextTool.class);
-        //扫描主叫列族
+        //扫描列族
         Scan scan=new Scan();
         scan.addFamily(Bytes.toBytes(Names.CF_INFO.getValue()));
         //设置mapper
@@ -36,7 +36,7 @@ public class AnalysisTextTool implements Tool {
         job.setReducerClass(AnalysisTextReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
-        //设置输出
+        //设置输出（本地生产数据-flume采集到kafka-存储在hbase-mapreduce分析-结果输出到mysql数据库）
         job.setOutputFormatClass(MySQLTextOutputFormat.class);
         //提交
         boolean flag = job.waitForCompletion(true);

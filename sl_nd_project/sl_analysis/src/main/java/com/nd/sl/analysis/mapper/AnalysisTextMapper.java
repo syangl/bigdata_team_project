@@ -25,6 +25,7 @@ public class AnalysisTextMapper extends TableMapper<Text,Text> {
         String date=values[3];
         String cid=values[2];
         String month=date.substring(4,6);
+        // 向内存缓冲区写出
         context.write(new Text(pid+"_"+pname+"_"+month),new Text(num+"_"+unitprice));//按月分类
     }
 }
